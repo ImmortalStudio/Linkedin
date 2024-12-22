@@ -2,11 +2,11 @@ import os
 from typing import Dict, Any, Optional
 from datetime import datetime
 from ..database import get_supabase
-from ae.core.system_orchestrator import SystemOrchestrator
-from ae.core.autogen_wrapper import AutogenWrapper
-from ae.core.skills.click_using_selector import click_using_selector
-from ae.core.skills.enter_text_and_click import enter_text_and_click
-from ae.core.skills.open_url import open_url
+from ..ae.core.system_orchestrator import SystemOrchestrator
+from ..ae.core.autogen_wrapper import AutogenWrapper
+from ..ae.core.skills.click_using_selector import click_using_selector
+from ..ae.core.skills.enter_text_and_click import enter_text_and_click
+from ..ae.core.skills.open_url import open_url
 
 class BDRAgent:
     def __init__(self):
