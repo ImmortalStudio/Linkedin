@@ -3,28 +3,28 @@ Agent-E package for LinkedIn automation.
 """
 def get_click_using_selector():
     """Get click_using_selector function lazily."""
-    from .core.skills import get_click_using_selector as _get_click_using_selector
-    return _get_click_using_selector()
+    from .core.skills.click_using_selector import click_using_selector
+    return click_using_selector
 
 def get_enter_text_and_click():
     """Get enter_text_and_click function lazily."""
-    from .core.skills import get_enter_text_and_click as _get_enter_text_and_click
-    return _get_enter_text_and_click()
+    from .core.skills.enter_text_and_click import enter_text_and_click
+    return enter_text_and_click
 
 def get_open_url():
     """Get open_url function lazily."""
-    from .core.skills import get_open_url as _get_open_url
-    return _get_open_url()
+    from .core.skills.open_url import open_url
+    return open_url
 
 def get_get_url():
     """Get get_url function lazily."""
-    from .core.skills import get_get_url as _get_get_url
-    return _get_get_url()
+    from .core.skills.get_url import get_url
+    return get_url
 
 def get_enter_text_using_selector():
     """Get enter_text_using_selector function lazily."""
-    from .core.skills import get_enter_text_using_selector as _get_enter_text_using_selector
-    return _get_enter_text_using_selector()
+    from .core.skills.enter_text_using_selector import enter_text_using_selector
+    return enter_text_using_selector
 
 def get_autogen_wrapper():
     """Get AutogenWrapper class lazily."""
