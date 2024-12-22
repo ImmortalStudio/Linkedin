@@ -6,7 +6,7 @@ primary_region = "sea"
 
 [env]
   PORT = "8080"
-  PYTHONPATH = "/app"
+  PYTHONPATH = "/app:/app/app"
 
 [http_service]
   internal_port = 8080
@@ -45,8 +45,10 @@ primary_region = "sea"
     python -m pip install --upgrade pip &&
     python -m pip install -r requirements.txt &&
     python -m pip install -e . &&
+    python -c 'import sys; print(sys.path)' &&
     playwright install-deps &&
-    playwright install chromium
+    playwright install chromium &&
+    python -m compileall /app/app/ae
   """
 
 [processes]
