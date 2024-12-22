@@ -2,13 +2,12 @@ import os
 from typing import Dict, Any, Optional
 from datetime import datetime
 from ..database import get_supabase
-from ..ae import (
-    AutogenWrapper,
-    SystemOrchestrator,
-    click_using_selector,
-    enter_text_and_click,
-    open_url
-)
+from ..ae.core import get_autogen_wrapper, get_system_orchestrator
+from ..ae.core.skills import click_using_selector, enter_text_and_click, open_url
+
+# Initialize classes lazily to avoid circular imports
+AutogenWrapper = get_autogen_wrapper()
+SystemOrchestrator = get_system_orchestrator()
 
 class BDRAgent:
     def __init__(self, orchestrator=None):

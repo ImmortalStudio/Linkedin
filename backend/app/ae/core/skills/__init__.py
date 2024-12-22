@@ -2,9 +2,13 @@
 from .click_using_selector import click_using_selector
 from .enter_text_and_click import enter_text_and_click
 from .open_url import open_url
+from .get_url import get_url
+from .enter_text_using_selector import enter_text_using_selector
 
 __all__ = [
     'click_using_selector',
     'enter_text_and_click',
-    'open_url'
+    'open_url',
+    'get_url',
+    'enter_text_using_selector'
 ]
