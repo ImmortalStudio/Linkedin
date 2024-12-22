@@ -3,7 +3,9 @@ from setuptools import setup, find_packages
 setup(
     name="linkedin-automation",
     version="0.1.0",
-    packages=find_packages(include=['app', 'app.*', 'app.ae', 'app.ae.*', 'app.ae.core.*']),
+    packages=find_packages(include=['app', 'app.*']),
+    package_dir={'': '.'},
+    package_data={'app': ['**/*.py']},
     install_requires=[
         "playwright>=1.39.0",
         "autogen>=1.0.16",
