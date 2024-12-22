@@ -1,5 +1,9 @@
 """Core functionality for Agent-E."""
-from .agents_llm_config import get_llm_config
+
+def get_llm_config():
+    """Get LLM configuration lazily."""
+    from .agents_llm_config import get_llm_config as _get_llm_config
+    return _get_llm_config()
 
 __all__ = ['get_llm_config']
 

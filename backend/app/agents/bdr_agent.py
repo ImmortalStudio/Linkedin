@@ -2,33 +2,25 @@ import os
 from typing import Dict, Any, Optional
 from datetime import datetime
 from ..database import get_supabase
-from ..ae import (
-    get_autogen_wrapper,
-    get_system_orchestrator
-)
-from ..ae.core.skills import (
-    get_click_using_selector,
-    get_enter_text_and_click,
-    get_open_url,
-    get_get_url,
-    get_enter_text_using_selector
-)
+from ..ae import get_autogen_wrapper, get_system_orchestrator
+from ..ae.core.skills.click_using_selector import click_using_selector
+from ..ae.core.skills.enter_text_and_click import enter_text_and_click
+from ..ae.core.skills.open_url import open_url
+from ..ae.core.skills.get_url import get_url
+from ..ae.core.skills.enter_text_using_selector import enter_text_using_selector
 
 # Initialize skill functions lazily
 _skills = None
 
 def get_skills():
-    """Get skill functions lazily."""
-    global _skills
-    if _skills is None:
-        _skills = {
-            'click': get_click_using_selector(),
-            'enter_and_click': get_enter_text_and_click(),
-            'open': get_open_url(),
-            'get': get_get_url(),
-            'enter_text': get_enter_text_using_selector()
-        }
-    return _skills
+    """Get skill functions."""
+    return {
+        'click': click_using_selector,
+        'enter_and_click': enter_text_and_click,
+        'open': open_url,
+        'get': get_url,
+        'enter_text': enter_text_using_selector
+    }
 
 class BDRAgent:
     def __init__(self, orchestrator=None):
