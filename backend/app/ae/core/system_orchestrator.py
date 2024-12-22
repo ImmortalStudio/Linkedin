@@ -5,14 +5,14 @@ import time
 
 from dotenv import load_dotenv
 
-from . import playwright_manager as browserManager
-from ..config import SOURCE_LOG_FOLDER_PATH
-from .agents_llm_config import AgentsLLMConfig
-from .autogen_wrapper import AutogenWrapper
-from ..utils.cli_helper import async_input  # type: ignore
-from ..utils.formatting_helper import str_to_bool
-from ..utils.http_helper import make_post_request
-from ..utils.logger import logger
+from app.ae.core import playwright_manager as browserManager
+from app.ae.config import SOURCE_LOG_FOLDER_PATH
+from app.ae.core.agents_llm_config import AgentsLLMConfig
+from app.ae.core.autogen_wrapper import AutogenWrapper
+from app.ae.utils.cli_helper import async_input  # type: ignore
+from app.ae.utils.formatting_helper import str_to_bool
+from app.ae.utils.http_helper import make_post_request
+from app.ae.utils.logger import logger
 
 
 class SystemOrchestrator:
