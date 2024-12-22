@@ -8,14 +8,14 @@ from playwright.async_api import BrowserContext
 from playwright.async_api import Page
 from playwright.async_api import Playwright
 
-from ae.core.notification_manager import NotificationManager
-from ae.core.ui_manager import UIManager
-from ae.utils.dom_mutation_observer import dom_mutation_change_detected
-from ae.utils.dom_mutation_observer import handle_navigation_for_mutation_observer
-from ae.utils.js_helper import beautify_plan_message
-from ae.utils.js_helper import escape_js_message
-from ae.utils.logger import logger
-from ae.utils.ui_messagetype import MessageType
+from .notification_manager import NotificationManager
+from .ui_manager import UIManager
+from ..utils.dom_mutation_observer import dom_mutation_change_detected
+from ..utils.dom_mutation_observer import handle_navigation_for_mutation_observer
+from ..utils.js_helper import beautify_plan_message
+from ..utils.js_helper import escape_js_message
+from ..utils.logger import logger
+from ..utils.ui_messagetype import MessageType
 
 # Enusres that playwright does not wait for font loading when taking screenshots. Reference: https://github.com/microsoft/playwright/issues/28995
 os.environ["PW_TEST_SCREENSHOT_NO_FONTS_READY"] = "1"
