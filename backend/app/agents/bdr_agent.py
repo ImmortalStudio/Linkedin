@@ -22,9 +22,14 @@ def get_skills():
         _skills = {
             'click': get_click_using_selector(),
             'enter_and_click': get_enter_text_and_click(),
-            'open': get_open_url()
+            'open': get_open_url(),
+            'get': get_get_url(),
+            'enter_text': get_enter_text_using_selector()
         }
     return _skills
+
+# Initialize skill functions lazily
+_skills = None
 
 class BDRAgent:
     def __init__(self, orchestrator=None):
