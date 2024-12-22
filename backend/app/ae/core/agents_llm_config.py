@@ -4,7 +4,7 @@ from typing import Any
 
 from dotenv import load_dotenv
 
-from ..utils.logger import logger
+from app.ae.utils.logger import logger
 
 
 class AgentsLLMConfig:

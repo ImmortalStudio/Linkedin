@@ -12,17 +12,17 @@ import nest_asyncio  # type: ignore
 import openai
 
 #from autogen import Cache
-from ..config import SOURCE_LOG_FOLDER_PATH
-from .agents.browser_nav_agent import BrowserNavAgent
-from .agents.high_level_planner_agent import PlannerAgent
-from .post_process_responses import final_reply_callback_planner_agent as notify_planner_messages  # type: ignore
-from .prompts import LLM_PROMPTS
-from .skills.get_url import geturl
-from ..utils.autogen_sequential_function_call import UserProxyAgent_SequentialFunctionExecution
-from ..utils.detect_llm_loops import is_agent_stuck_in_loop
-from ..utils.logger import logger
-from ..utils.response_parser import parse_response
-from ..utils.ui_messagetype import MessageType
+from app.ae.config import SOURCE_LOG_FOLDER_PATH
+from app.ae.core.agents.browser_nav_agent import BrowserNavAgent
+from app.ae.core.agents.high_level_planner_agent import PlannerAgent
+from app.ae.core.post_process_responses import final_reply_callback_planner_agent as notify_planner_messages  # type: ignore
+from app.ae.core.prompts import LLM_PROMPTS
+from app.ae.core.skills.get_url import geturl
+from app.ae.utils.autogen_sequential_function_call import UserProxyAgent_SequentialFunctionExecution
+from app.ae.utils.detect_llm_loops import is_agent_stuck_in_loop
+from app.ae.utils.logger import logger
+from app.ae.utils.response_parser import parse_response
+from app.ae.utils.ui_messagetype import MessageType
 
 nest_asyncio.apply()  # type: ignore
 
