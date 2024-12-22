@@ -9,12 +9,17 @@ from ..agents.bdr_agent import BDRAgent
 from ..services.scheduler import TaskScheduler
 
 router = APIRouter()
-bdr_agent = BDRAgent()
+bdr_agent = None
 task_scheduler = TaskScheduler()
 
 @router.on_event("startup")
 async def startup_event():
     """Initialize BDR agent and task scheduler on startup"""
+    global bdr_agent
+    from ..ae.core.system_orchestrator import SystemOrchestrator
+    
+    orchestrator = SystemOrchestrator()
+    bdr_agent = BDRAgent(orchestrator)
     await bdr_agent.initialize_automation()
     await task_scheduler.initialize()
 

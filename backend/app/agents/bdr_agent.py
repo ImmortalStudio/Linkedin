@@ -2,19 +2,30 @@ import os
 from typing import Dict, Any, Optional
 from datetime import datetime
 from ..database import get_supabase
-from ..ae.core.system_orchestrator import SystemOrchestrator
 from ..ae.core.autogen_wrapper import AutogenWrapper
 from ..ae.core.skills.click_using_selector import click_using_selector
 from ..ae.core.skills.enter_text_and_click import enter_text_and_click
 from ..ae.core.skills.open_url import open_url
 
 class BDRAgent:
-    def __init__(self):
-        self.orchestrator = SystemOrchestrator()
+    def __init__(self, orchestrator=None):
+        """Initialize BDR Agent with optional orchestrator instance.
+        
+        Args:
+            orchestrator: Pre-configured orchestrator instance for LinkedIn automation
+        """
+        self.orchestrator = orchestrator
         self.autogen = AutogenWrapper()
+        self.supabase = get_supabase()
         
     async def initialize_automation(self):
         """Initialize the automation system with required configurations"""
+        from ..ae.core.system_orchestrator import SystemOrchestrator
+        
+        if not self.orchestrator:
+            self.orchestrator = SystemOrchestrator()
+            await self.orchestrator.initialize()
+            
         # Configure AutoGen with environment variables
         config = {
             "model_name": os.getenv("AUTOGEN_MODEL_NAME"),
@@ -51,15 +62,88 @@ class BDRAgent:
         # Send follow-up message if connected
         await self.send_follow_up_message(lead)
         
-    async def check_and_connect(self, lead: Dict[str, Any]):
-        """Check connection status and send connection request if needed"""
-        # Implementation using Agent-E skills for LinkedIn interaction
-        pass
+    async def check_and_connect(self, lead: Dict[str, Any]) -> bool:
+        """Check connection status and send connection request if needed.
+        
+        Args:
+            lead: Dictionary containing lead information
+            
+        Returns:
+            bool: True if connected (either previously or now), False otherwise
+        """
+        if not self.orchestrator:
+            raise ValueError("Orchestrator not initialized")
+            
+        # Visit profile
+        await self.orchestrator.execute_skill(
+            open_url,
+            {"url": lead["linkedin_url"]}
+        )
+        
+        # Check if connect button exists
+        connect_exists = await self.orchestrator.execute_skill(
+            click_using_selector,
+            {"selector": "button[aria-label*='Connect']", "check_only": True}
+        )
+        
+        if connect_exists:
+            # Send connection request
+            await self.orchestrator.execute_skill(
+                click_using_selector,
+                {"selector": "button[aria-label*='Connect']"}
+            )
+            
+            # Click send in the modal
+            await self.orchestrator.execute_skill(
+                click_using_selector,
+                {"selector": "button[aria-label*='Send now']"}
+            )
+            return False
+        
+        return True
         
     async def send_follow_up_message(self, lead: Dict[str, Any]):
-        """Send a follow-up message to a connected lead"""
-        # Implementation using Agent-E skills for LinkedIn messaging
-        pass
+        """Send a follow-up message to a connected lead.
+        
+        Args:
+            lead: Dictionary containing lead information
+        """
+        if not self.orchestrator:
+            raise ValueError("Orchestrator not initialized")
+            
+        # Click message button
+        await self.orchestrator.execute_skill(
+            click_using_selector,
+            {"selector": "button[aria-label*='Message']"}
+        )
+        
+        # Get message template
+        async for supabase in get_supabase():
+            campaign = await supabase.table("campaigns").select("*").eq("id", lead["campaign_id"]).single()
+            message_template = campaign.data["message_template"]
+            
+            # Format message with lead data
+            message = message_template.format(
+                name=lead["name"],
+                company=lead.get("company", "your company"),
+                title=lead.get("title", "professional")
+            )
+            
+            # Type and send message
+            await self.orchestrator.execute_skill(
+                enter_text_and_click,
+                {
+                    "text": message,
+                    "input_selector": "div[role='textbox']",
+                    "button_selector": "button[aria-label*='Send']"
+                }
+            )
+            
+            # Update lead status
+            await supabase.table("leads").update({
+                "status": "messaged",
+                "last_contacted": datetime.utcnow().isoformat()
+            }).eq("id", lead["id"]).execute()
         
     async def schedule_call(self, lead: Dict[str, Any], calendly_link: str):
         """Schedule a call using Calendly integration"""
