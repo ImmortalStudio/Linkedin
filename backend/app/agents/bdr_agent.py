@@ -2,12 +2,12 @@ import os
 from typing import Dict, Any, Optional
 from datetime import datetime
 from ..database import get_supabase
-from ..ae import (
+from ..ae.core import (
     AutogenWrapper,
+    SystemOrchestrator,
     click_using_selector,
     enter_text_and_click,
-    open_url,
-    SystemOrchestrator
+    open_url
 )
 
 class BDRAgent:

@@ -1,9 +1,6 @@
 """
 Agent-E package for LinkedIn automation.
 """
-"""
-Agent-E package for LinkedIn automation.
-"""
 from .core import (
     AutogenWrapper,
     SystemOrchestrator,
