@@ -5,10 +5,15 @@ from ..database import get_supabase
 from ..ae import (
     get_autogen_wrapper,
     get_system_orchestrator,
-    click_using_selector,
-    enter_text_and_click,
-    open_url
+    get_click_using_selector,
+    get_enter_text_and_click,
+    get_open_url
 )
+
+# Get skill functions
+click_using_selector = get_click_using_selector()
+enter_text_and_click = get_enter_text_and_click()
+open_url = get_open_url()
 
 class BDRAgent:
     def __init__(self, orchestrator=None):

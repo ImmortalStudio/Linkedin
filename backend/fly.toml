@@ -45,7 +45,7 @@ primary_region = "sea"
     python -m pip install --upgrade pip &&
     python -m pip install -e . &&
     python -m pip install -r requirements.txt &&
-    python -c 'import sys; print(sys.path); from app.ae.core import AutogenWrapper; print("Import successful!")' &&
+    python -c 'import sys; print(sys.path); from app.ae import AutogenWrapper; print("Import successful!")' &&
     playwright install-deps &&
     playwright install chromium &&
     python -m compileall /app/app/ae

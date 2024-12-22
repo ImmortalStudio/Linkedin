@@ -1,13 +1,30 @@
 """
 Agent-E package for LinkedIn automation.
 """
-from .core.skills import (
-    click_using_selector,
-    enter_text_and_click,
-    open_url,
-    get_url,
-    enter_text_using_selector
-)
+def get_click_using_selector():
+    """Get click_using_selector function lazily."""
+    from .core.skills import click_using_selector
+    return click_using_selector
+
+def get_enter_text_and_click():
+    """Get enter_text_and_click function lazily."""
+    from .core.skills import enter_text_and_click
+    return enter_text_and_click
+
+def get_open_url():
+    """Get open_url function lazily."""
+    from .core.skills import open_url
+    return open_url
+
+def get_get_url():
+    """Get get_url function lazily."""
+    from .core.skills import get_url
+    return get_url
+
+def get_enter_text_using_selector():
+    """Get enter_text_using_selector function lazily."""
+    from .core.skills import enter_text_using_selector
+    return enter_text_using_selector
 
 def get_autogen_wrapper():
     """Get AutogenWrapper class lazily."""
@@ -34,9 +51,9 @@ __all__ = [
     'get_system_orchestrator',
     'get_playwright_manager',
     'get_llm_config',
-    'click_using_selector',
-    'enter_text_and_click',
-    'open_url',
-    'get_url',
-    'enter_text_using_selector'
+    'get_click_using_selector',
+    'get_enter_text_and_click',
+    'get_open_url',
+    'get_get_url',
+    'get_enter_text_using_selector'
 ]
