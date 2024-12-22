@@ -1,7 +1,7 @@
 import os
 
-from app.ae.config import USER_PREFERENCES_PATH
-from app.ae.utils.logger import logger
+from ...config import USER_PREFERENCES_PATH
+from ...utils.logger import logger
 
 
 def get_user_ltm():

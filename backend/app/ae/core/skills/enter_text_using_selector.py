@@ -7,13 +7,13 @@ from typing import List  # noqa: UP035
 
 from playwright.async_api import Page
 
-from app.ae.core.playwright_manager import PlaywrightManager
-from app.ae.core.skills.press_key_combination import press_key_combination
-from app.ae.utils.dom_helper import get_element_outer_html
-from app.ae.utils.dom_mutation_observer import subscribe
-from app.ae.utils.dom_mutation_observer import unsubscribe
-from app.ae.utils.logger import logger
-from app.ae.utils.ui_messagetype import MessageType
+from ..playwright_manager import PlaywrightManager
+from .press_key_combination import press_key_combination
+from ...utils.dom_helper import get_element_outer_html
+from ...utils.dom_mutation_observer import subscribe
+from ...utils.dom_mutation_observer import unsubscribe
+from ...utils.logger import logger
+from ...utils.ui_messagetype import MessageType
 
 
 @dataclass

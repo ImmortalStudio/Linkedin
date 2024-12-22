@@ -3,9 +3,9 @@ from typing import Any
 
 import autogen  # type: ignore
 
-from app.ae.core.playwright_manager import PlaywrightManager
-from app.ae.utils.logger import logger
-from app.ae.utils.ui_messagetype import MessageType
+from .playwright_manager import PlaywrightManager
+from ..utils.logger import logger
+from ..utils.ui_messagetype import MessageType
 
 
 def final_reply_callback_user_proxy(recipient: autogen.ConversableAgent, messages: list[dict[str, Any]], sender: autogen.Agent, config: dict[str, Any]):

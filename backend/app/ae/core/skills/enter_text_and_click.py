@@ -2,11 +2,11 @@ import asyncio
 import inspect
 from typing import Annotated
 
-from app.ae.core.playwright_manager import PlaywrightManager
-from app.ae.core.skills.click_using_selector import do_click
-from app.ae.core.skills.enter_text_using_selector import do_entertext
-from app.ae.core.skills.press_key_combination import do_press_key_combination
-from app.ae.utils.logger import logger
+from ..playwright_manager import PlaywrightManager
+from .click_using_selector import do_click
+from .enter_text_using_selector import do_entertext
+from .press_key_combination import do_press_key_combination
+from ...utils.logger import logger
 from app.ae.utils.ui_messagetype import MessageType
 
 

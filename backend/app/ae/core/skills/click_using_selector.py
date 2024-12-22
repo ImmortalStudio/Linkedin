@@ -6,12 +6,12 @@ from typing import Annotated
 from playwright.async_api import ElementHandle
 from playwright.async_api import Page
 
-from app.ae.core.playwright_manager import PlaywrightManager
-from app.ae.utils.dom_helper import get_element_outer_html
-from app.ae.utils.dom_mutation_observer import subscribe  # type: ignore
-from app.ae.utils.dom_mutation_observer import unsubscribe  # type: ignore
-from app.ae.utils.logger import logger
-from app.ae.utils.ui_messagetype import MessageType
+from ..playwright_manager import PlaywrightManager
+from ...utils.dom_helper import get_element_outer_html
+from ...utils.dom_mutation_observer import subscribe  # type: ignore
+from ...utils.dom_mutation_observer import unsubscribe  # type: ignore
+from ...utils.logger import logger
+from ...utils.ui_messagetype import MessageType
 
 
 async def click(selector: Annotated[str, "The properly formed query selector string to identify the element for the click action (e.g. [mmid='114']). When \"mmid\" attribute is present, use it for the query selector."],
