@@ -2,10 +2,13 @@ import os
 from typing import Dict, Any, Optional
 from datetime import datetime
 from ..database import get_supabase
-from ..ae.core.autogen_wrapper import AutogenWrapper
-from ..ae.core.skills.click_using_selector import click_using_selector
-from ..ae.core.skills.enter_text_and_click import enter_text_and_click
-from ..ae.core.skills.open_url import open_url
+from ..ae import (
+    AutogenWrapper,
+    click_using_selector,
+    enter_text_and_click,
+    open_url,
+    SystemOrchestrator
+)
 
 class BDRAgent:
     def __init__(self, orchestrator=None):
@@ -20,8 +23,6 @@ class BDRAgent:
         
     async def initialize_automation(self):
         """Initialize the automation system with required configurations"""
-        from ..ae.core.system_orchestrator import SystemOrchestrator
-        
         if not self.orchestrator:
             self.orchestrator = SystemOrchestrator()
             await self.orchestrator.initialize()
