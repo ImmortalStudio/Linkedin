@@ -2,12 +2,13 @@ import os
 from typing import Dict, Any, Optional
 from datetime import datetime
 from ..database import get_supabase
-from ..ae.core import get_autogen_wrapper, get_system_orchestrator
-from ..ae.core.skills import click_using_selector, enter_text_and_click, open_url
-
-# Initialize classes lazily to avoid circular imports
-AutogenWrapper = get_autogen_wrapper()
-SystemOrchestrator = get_system_orchestrator()
+from ..ae import (
+    get_autogen_wrapper,
+    get_system_orchestrator,
+    click_using_selector,
+    enter_text_and_click,
+    open_url
+)
 
 class BDRAgent:
     def __init__(self, orchestrator=None):
@@ -17,12 +18,21 @@ class BDRAgent:
             orchestrator: Pre-configured orchestrator instance for LinkedIn automation
         """
         self.orchestrator = orchestrator
-        self.autogen = AutogenWrapper()
+        self._autogen = None
         self.supabase = get_supabase()
+        
+    @property
+    def autogen(self):
+        """Lazy load AutogenWrapper instance."""
+        if self._autogen is None:
+            AutogenWrapper = get_autogen_wrapper()
+            self._autogen = AutogenWrapper()
+        return self._autogen
         
     async def initialize_automation(self):
         """Initialize the automation system with required configurations"""
         if not self.orchestrator:
+            SystemOrchestrator = get_system_orchestrator()
             self.orchestrator = SystemOrchestrator()
             await self.orchestrator.initialize()
             
