@@ -2,7 +2,7 @@ import os
 from typing import Dict, Any, Optional
 from datetime import datetime
 from ..database import get_supabase
-from ..ae.core import (
+from ..ae import (
     AutogenWrapper,
     SystemOrchestrator,
     click_using_selector,
