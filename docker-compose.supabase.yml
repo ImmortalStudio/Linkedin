@@ -4,7 +4,7 @@ services:
     image: supabase/postgres:15.1.0.117
     container_name: supabase-postgres
     ports:
-      - "${POSTGRES_PORT}:5432"
+      - "5432:5432"
     environment:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
