@@ -2,6 +2,8 @@
 Agent-E package for LinkedIn automation.
 """
 
+from .core import get_llm_config
+
 def get_autogen_wrapper():
     """Get AutogenWrapper class lazily."""
     from .core.autogen_wrapper import AutogenWrapper
@@ -16,11 +18,6 @@ def get_playwright_manager():
     """Get PlaywrightManager class lazily."""
     from .core.playwright_manager import PlaywrightManager
     return PlaywrightManager
-
-def get_llm_config():
-    """Get LLM configuration."""
-    from .core.agents_llm_config import get_llm_config as _get_llm_config
-    return _get_llm_config()
 
 __all__ = [
     'get_autogen_wrapper',
