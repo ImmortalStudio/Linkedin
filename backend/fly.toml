@@ -41,7 +41,13 @@ primary_region = "sea"
     grace_period = "1s"
 
 [deploy]
-  release_command = "python -m pip install -e ."
+  release_command = """
+    python -m pip install --upgrade pip &&
+    python -m pip install -r requirements.txt &&
+    python -m pip install -e . &&
+    playwright install-deps &&
+    playwright install chromium
+  """
 
 [processes]
   app = "uvicorn app.main:app --host 0.0.0.0 --port 8080"
