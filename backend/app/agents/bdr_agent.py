@@ -10,10 +10,19 @@ from ..ae import (
     get_open_url
 )
 
-# Get skill functions
-click_using_selector = get_click_using_selector()
-enter_text_and_click = get_enter_text_and_click()
-open_url = get_open_url()
+# Initialize skill functions lazily
+_skills = None
+
+def get_skills():
+    """Get skill functions lazily."""
+    global _skills
+    if _skills is None:
+        _skills = {
+            'click': get_click_using_selector(),
+            'enter_and_click': get_enter_text_and_click(),
+            'open': get_open_url()
+        }
+    return _skills
 
 class BDRAgent:
     def __init__(self, orchestrator=None):
@@ -65,9 +74,11 @@ class BDRAgent:
                 
     async def process_lead(self, lead: Dict[str, Any]):
         """Process a single lead with automated outreach"""
+        skills = get_skills()
+        
         # Navigate to lead's LinkedIn profile
         await self.orchestrator.execute_skill(
-            open_url,
+            skills['open'],
             {"url": lead["linkedin_url"]}
         )
         
@@ -89,28 +100,30 @@ class BDRAgent:
         if not self.orchestrator:
             raise ValueError("Orchestrator not initialized")
             
+        skills = get_skills()
+            
         # Visit profile
         await self.orchestrator.execute_skill(
-            open_url,
+            skills['open'],
             {"url": lead["linkedin_url"]}
         )
         
         # Check if connect button exists
         connect_exists = await self.orchestrator.execute_skill(
-            click_using_selector,
+            skills['click'],
             {"selector": "button[aria-label*='Connect']", "check_only": True}
         )
         
         if connect_exists:
             # Send connection request
             await self.orchestrator.execute_skill(
-                click_using_selector,
+                skills['click'],
                 {"selector": "button[aria-label*='Connect']"}
             )
             
             # Click send in the modal
             await self.orchestrator.execute_skill(
-                click_using_selector,
+                skills['click'],
                 {"selector": "button[aria-label*='Send now']"}
             )
             return False
@@ -126,9 +139,11 @@ class BDRAgent:
         if not self.orchestrator:
             raise ValueError("Orchestrator not initialized")
             
+        skills = get_skills()
+            
         # Click message button
         await self.orchestrator.execute_skill(
-            click_using_selector,
+            skills['click'],
             {"selector": "button[aria-label*='Message']"}
         )
         
@@ -146,7 +161,7 @@ class BDRAgent:
             
             # Type and send message
             await self.orchestrator.execute_skill(
-                enter_text_and_click,
+                skills['enter_and_click'],
                 {
                     "text": message,
                     "input_selector": "div[role='textbox']",
