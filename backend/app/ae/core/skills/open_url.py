@@ -3,9 +3,9 @@ from typing import Annotated
 
 from playwright.async_api import TimeoutError as PlaywrightTimeoutError
 
-from ae.core.playwright_manager import PlaywrightManager
-from ae.utils.logger import logger
-from ae.utils.ui_messagetype import MessageType
+from app.ae.core.playwright_manager import PlaywrightManager
+from app.ae.utils.logger import logger
+from app.ae.utils.ui_messagetype import MessageType
 
 
 async def openurl(url: Annotated[str, "The URL to navigate to. Value must include the protocol (http:// or https://)."],

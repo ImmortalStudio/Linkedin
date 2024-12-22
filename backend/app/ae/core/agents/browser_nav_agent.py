@@ -6,22 +6,22 @@ from typing import Any
 
 import autogen  # type: ignore
 
-from ae.core.memory.static_ltm import get_user_ltm
-from ae.core.prompts import LLM_PROMPTS
-from ae.core.skills.click_using_selector import click as click_element
+from app.ae.core.memory.static_ltm import get_user_ltm
+from app.ae.core.prompts import LLM_PROMPTS
+from app.ae.core.skills.click_using_selector import click as click_element
 
-# from ae.core.skills.enter_text_and_click import enter_text_and_click
-from ae.core.skills.enter_text_using_selector import bulk_enter_text
-from ae.core.skills.enter_text_using_selector import entertext
-from ae.core.skills.get_dom_with_content_type import get_dom_with_content_type
-from ae.core.skills.get_url import geturl
-from ae.core.skills.open_url import openurl
-from ae.core.skills.pdf_text_extractor import extract_text_from_pdf
+# from app.ae.core.skills.enter_text_and_click import enter_text_and_click
+from app.ae.core.skills.enter_text_using_selector import bulk_enter_text
+from app.ae.core.skills.enter_text_using_selector import entertext
+from app.ae.core.skills.get_dom_with_content_type import get_dom_with_content_type
+from app.ae.core.skills.get_url import geturl
+from app.ae.core.skills.open_url import openurl
+from app.ae.core.skills.pdf_text_extractor import extract_text_from_pdf
 
-#from ae.core.skills.pdf_text_extractor import extract_text_from_pdf
-from ae.core.skills.press_key_combination import press_key_combination
-from ae.core.skills.skill_registry import skill_registry
-from ae.utils.logger import logger
+#from app.ae.core.skills.pdf_text_extractor import extract_text_from_pdf
+from app.ae.core.skills.press_key_combination import press_key_combination
+from app.ae.core.skills.skill_registry import skill_registry
+from app.ae.utils.logger import logger
 
 
 class BrowserNavAgent:

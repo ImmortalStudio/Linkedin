@@ -1,14 +1,13 @@
-
 import os
 import traceback
 
 from playwright.async_api import Frame
 from playwright.async_api import Page
 
-from ae.config import PROJECT_SOURCE_ROOT
-from ae.utils.js_helper import escape_js_message
-from ae.utils.logger import logger
-from ae.utils.ui_messagetype import MessageType
+from app.ae.config import PROJECT_SOURCE_ROOT
+from app.ae.utils.js_helper import escape_js_message
+from app.ae.utils.logger import logger
+from app.ae.utils.ui_messagetype import MessageType
 
 
 class UIManager:

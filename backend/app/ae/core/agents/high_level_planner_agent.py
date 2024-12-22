@@ -6,11 +6,11 @@ from typing import Any
 import autogen  # type: ignore
 from autogen import ConversableAgent  # type: ignore
 
-from ae.core.memory.static_ltm import get_user_ltm
-from ae.core.post_process_responses import final_reply_callback_planner_agent as print_message_as_planner  # type: ignore
-from ae.core.prompts import LLM_PROMPTS
-from ae.core.skills.get_user_input import get_user_input
-from ae.utils.logger import logger
+from app.ae.core.memory.static_ltm import get_user_ltm
+from app.ae.core.post_process_responses import final_reply_callback_planner_agent as print_message_as_planner  # type: ignore
+from app.ae.core.prompts import LLM_PROMPTS
+from app.ae.core.skills.get_user_input import get_user_input
+from app.ae.utils.logger import logger
 
 
 class PlannerAgent:
