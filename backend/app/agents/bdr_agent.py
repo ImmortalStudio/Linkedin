@@ -28,9 +28,6 @@ def get_skills():
         }
     return _skills
 
-# Initialize skill functions lazily
-_skills = None
-
 class BDRAgent:
     def __init__(self, orchestrator=None):
         """Initialize BDR Agent with optional orchestrator instance.
